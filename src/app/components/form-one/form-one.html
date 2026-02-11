@@ -1,0 +1,44 @@
+<form [formGroup]="profileForm" (ngSubmit)="submit()">
+    <div>
+        <label for="name">name:</label>
+        <input type="text" id="name" formControlName="name">
+    </div>
+    <div>
+        <label for="surname">cognome:</label>
+        <input type="text" id="surname" formControlName="surname">
+
+    </div>
+
+    <div formGroupName="adress">
+        <h3>Indirizzo</h3>
+
+        <div>
+            <label for="city">città:</label>
+            <input type="text" id="city" formControlName="city">
+        </div>
+
+        <div>
+            <label for="street">strada:</label>
+            <input type="text" id="street" formControlName="street">
+        </div>
+
+        <div>
+            <label for="number">numero:</label>
+            <input type="text" id="number" formControlName="number">
+        </div>
+    </div>
+    <div formArrayName="aliases">
+        <h3>Aliases</h3>
+        <button (click)="addAlias()">+</button>
+        @for(alias of getAliases().controls; track alias; let i = $index ){
+        <div>
+            <label for="aliases-{{i}}">aliases:</label>
+            <input type="text" id="aliases-{{i}}" [formControlName]="i">
+            <button (click)="removeAlias(i)">-</button>
+        </div>
+        }
+    </div>
+
+
+    <button type="submit" [disabled]="profileForm.invalid">invia</button>
+</form>
